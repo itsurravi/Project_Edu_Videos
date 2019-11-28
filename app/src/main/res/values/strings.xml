@@ -1,6 +1,45 @@
 <resources>
     <string name="app_name">Project_Edu_Videos</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <array name="states">
+        <item>---States---</item>
+        <item>Haryana</item>
+        <item>Rajasthan</item>
+        <item>Uttar Pradesh</item>
+        <item>Punjab</item>
+    </array>
+
+    <array name="haryana_states">
+        <item>---City---</item>
+        <item>Gurugram</item>
+        <item>Panipat</item>
+        <item>Ambala</item>
+        <item>Yamunanagar</item>
+    </array>
+
+    <array name="up_states">
+        <item>---City---</item>
+        <item>Lucknow</item>
+        <item>Ghaziabad</item>
+        <item>Agra</item>
+        <item>Varanasi</item>
+    </array>
+
+    <array name="pb_states">
+        <item>---City---</item>
+        <item>Ludhiana</item>
+        <item>Amritsar</item>
+        <item>Jalandhar</item>
+        <item>Patiala</item>
+    </array>
+
+    <array name="rj_states">
+        <item>---City---</item>
+        <item>Jaipur</item>
+        <item>Jodhpur</item>
+        <item>Kota</item>
+        <item>Ajmer</item>
+    </array>
+
+
 </resources>

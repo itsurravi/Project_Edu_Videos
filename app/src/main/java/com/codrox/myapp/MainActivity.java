@@ -5,12 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.transition.Slide;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.animation.DecelerateInterpolator;
-import android.widget.Toast;
 
 import com.codrox.myapp.fragments.AccountFragment;
 import com.codrox.myapp.fragments.CartFragment;
@@ -37,7 +34,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         HomeFragment f = new HomeFragment();
 
         FragmentManager manager = getSupportFragmentManager();
-//        manager.popBackStack(BACK_STACK_ROOT_TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.fragment_container, f);
         transaction.commit();
@@ -84,7 +80,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         final FragmentManager manager = getSupportFragmentManager();
 //        manager.popBackStack(BACK_STACK_ROOT_TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         FragmentTransaction transaction = manager.beginTransaction();
-
         transaction.replace(R.id.fragment_container, fragment, TAG);
         transaction.addToBackStack(BACK_STACK_ROOT_TAG);
         transaction.commit();
