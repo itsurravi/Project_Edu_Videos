@@ -4,6 +4,8 @@ package com.codrox.myapp.fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,30 +46,29 @@ public class HomeFragment extends Fragment {
         sp_states.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch (position)
-                {
+                switch (position) {
                     case 0:
-                        ArrayAdapter aa = new ArrayAdapter(getContext(),android.R.layout.simple_spinner_item,ar);
+                        ArrayAdapter aa = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, ar);
                         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         sp_cities.setAdapter(aa);
                         break;
                     case 1:
-                        ArrayAdapter hr = new ArrayAdapter(getContext(),android.R.layout.simple_spinner_item,getContext().getResources().getStringArray(R.array.haryana_states));
+                        ArrayAdapter hr = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, getContext().getResources().getStringArray(R.array.haryana_states));
                         hr.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         sp_cities.setAdapter(hr);
                         break;
                     case 2:
-                        ArrayAdapter rj = new ArrayAdapter(getContext(),android.R.layout.simple_spinner_item,getContext().getResources().getStringArray(R.array.rj_states));
+                        ArrayAdapter rj = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, getContext().getResources().getStringArray(R.array.rj_states));
                         rj.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         sp_cities.setAdapter(rj);
                         break;
                     case 3:
-                        ArrayAdapter up = new ArrayAdapter(getContext(),android.R.layout.simple_spinner_item,getContext().getResources().getStringArray(R.array.up_states));
+                        ArrayAdapter up = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, getContext().getResources().getStringArray(R.array.up_states));
                         up.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         sp_cities.setAdapter(up);
                         break;
                     case 4:
-                        ArrayAdapter pb = new ArrayAdapter(getContext(),android.R.layout.simple_spinner_item,getContext().getResources().getStringArray(R.array.pb_states));
+                        ArrayAdapter pb = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, getContext().getResources().getStringArray(R.array.pb_states));
                         pb.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         sp_cities.setAdapter(pb);
                         break;
@@ -85,16 +86,32 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 String st = sp_cities.getSelectedItem().toString();
 
-                if (st.equals(ar[0]))
+                if (st.equals(ar[0])) {
+                    Toast.makeText(getContext(), "Please Choose a State", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(st.equals("---City---"))
                 {
                     Toast.makeText(getContext(), "Please Choose a City", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
+                loadFragment(new ClassFragment());
+
+                sp_states.setSelection(0);
             }
         });
 
         return v;
     }
 
+    private void loadFragment(Fragment fragment) {
+        // load fragment
+        final FragmentManager manager = getFragmentManager();
+//        manager.popBackStack(BACK_STACK_ROOT_TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.fragment_container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
 }

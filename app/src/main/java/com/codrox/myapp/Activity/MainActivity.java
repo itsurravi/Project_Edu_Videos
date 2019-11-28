@@ -1,4 +1,4 @@
-package com.codrox.myapp;
+package com.codrox.myapp.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,11 +9,13 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.codrox.myapp.R;
 import com.codrox.myapp.fragments.AccountFragment;
 import com.codrox.myapp.fragments.CartFragment;
 import com.codrox.myapp.fragments.HomeFragment;
 import com.codrox.myapp.fragments.LibraryFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 
 import static androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE;
 
