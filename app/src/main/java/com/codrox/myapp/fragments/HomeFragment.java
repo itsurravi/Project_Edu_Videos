@@ -1,12 +1,16 @@
 package com.codrox.myapp.fragments;
 
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +20,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.codrox.myapp.Activity.MainActivity;
 import com.codrox.myapp.R;
 
 /**
@@ -28,6 +33,7 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
+
     Spinner sp_states, sp_cities;
     Button btn_go;
 
@@ -37,7 +43,6 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         View v = inflater.inflate(R.layout.fragment_home, container, false);
         sp_states = v.findViewById(R.id.sp_states);
         sp_cities = v.findViewById(R.id.sp_city);
@@ -90,8 +95,7 @@ public class HomeFragment extends Fragment {
                     Toast.makeText(getContext(), "Please Choose a State", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(st.equals("---City---"))
-                {
+                if (st.equals("---City---")) {
                     Toast.makeText(getContext(), "Please Choose a City", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -114,4 +118,6 @@ public class HomeFragment extends Fragment {
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
+
 }

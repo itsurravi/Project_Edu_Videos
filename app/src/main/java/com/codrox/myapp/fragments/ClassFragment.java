@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import com.codrox.myapp.Activity.MainActivity;
 import com.codrox.myapp.Activity.SubjectListActivity;
 import com.codrox.myapp.Adapter.ClassFragGridAdapter;
 import com.codrox.myapp.R;
@@ -54,4 +55,9 @@ public class ClassFragment extends Fragment {
         return v;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        MainActivity.navigationItemView.getMenu().findItem(R.id.nav_home).setChecked(true);
+    }
 }
