@@ -46,8 +46,6 @@ public class CartFragment extends Fragment {
 
         initialize(v);
 
-
-
         btn_pay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

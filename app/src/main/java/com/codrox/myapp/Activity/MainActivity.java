@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     public static final String BACK_STACK_ROOT_TAG = "root_fragment";
 
     public static BottomNavigationView navigationItemView;
-    private static boolean homefirst = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
