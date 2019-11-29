@@ -17,9 +17,6 @@ import com.codrox.myapp.fragments.HomeFragment;
 import com.codrox.myapp.fragments.LibraryFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.util.List;
-
-import static androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 

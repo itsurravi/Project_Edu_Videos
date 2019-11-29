@@ -1,16 +1,13 @@
 package com.codrox.myapp.fragments;
 
 
-import android.content.Context;
+
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,9 +20,8 @@ import android.widget.Toast;
 import com.codrox.myapp.Activity.MainActivity;
 import com.codrox.myapp.R;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+import static com.codrox.myapp.Activity.MainActivity.BACK_STACK_ROOT_TAG;
+
 public class HomeFragment extends Fragment {
 
 
@@ -114,7 +110,7 @@ public class HomeFragment extends Fragment {
         final FragmentManager manager = getFragmentManager();
 //        manager.popBackStack(BACK_STACK_ROOT_TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.fragment_container, fragment);
+        transaction.add( R.id.fragment_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
