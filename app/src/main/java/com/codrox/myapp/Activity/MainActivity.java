@@ -39,9 +39,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     @Override
     public void onBackPressed() {
-//        super.onBackPressed();
         FragmentManager manager = getSupportFragmentManager();
-
         if (manager.getBackStackEntryCount() > 1) {
             manager.popBackStack();
         } else {
