@@ -2,6 +2,7 @@ package com.codrox.myapp.fragments;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codrox.myapp.Activity.MainActivity;
+import com.codrox.myapp.Activity.VideoPlayerActivity;
 import com.codrox.myapp.Adapter.VideoLibraryAdapter;
 import com.codrox.myapp.Models.Subjects;
 import com.codrox.myapp.R;
@@ -58,11 +60,12 @@ public class LibraryFragment extends Fragment {
         video_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                getContext().startActivity(new Intent(getContext(), VideoPlayerActivity.class));
             }
         });
 
         return v;
     }
+
 
 }

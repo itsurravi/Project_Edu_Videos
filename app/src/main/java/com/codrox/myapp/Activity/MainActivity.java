@@ -6,10 +6,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.codrox.myapp.Database.PrefManger;
 import com.codrox.myapp.R;
 import com.codrox.myapp.fragments.AccountFragment;
 import com.codrox.myapp.fragments.CartFragment;
@@ -23,11 +26,14 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     public static final String BACK_STACK_ROOT_TAG = "root_fragment";
 
     public static BottomNavigationView navigationItemView;
+    private PrefManger prefManger;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        prefManger = new PrefManger(this);
 
         navigationItemView = findViewById(R.id.navigation);
         navigationItemView.setOnNavigationItemSelectedListener(this);
@@ -36,6 +42,24 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         loadFragment(f, HomeFragment.class.getSimpleName());
 
     }
+
+    /*
+    log out option must be in accounts fragment
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.options_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId()==R.id.logout){
+            prefManger.setLoggedIn(PrefManger.USER_LOGIN, false);
+            startActivity(new Intent(MainActivity.this,LoginActivity.class));
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }*/
 
     @Override
     public void onBackPressed() {
