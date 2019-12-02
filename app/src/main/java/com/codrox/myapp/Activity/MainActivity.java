@@ -43,24 +43,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     }
 
-    /*
-    log out option must be in accounts fragment
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.options_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId()==R.id.logout){
-            prefManger.setLoggedIn(PrefManger.USER_LOGIN, false);
-            startActivity(new Intent(MainActivity.this,LoginActivity.class));
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
-    }*/
-
     @Override
     public void onBackPressed() {
         FragmentManager manager = getSupportFragmentManager();

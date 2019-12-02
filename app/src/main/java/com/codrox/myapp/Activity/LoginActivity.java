@@ -20,8 +20,6 @@ import com.codrox.myapp.Database.PrefManger;
 import com.codrox.myapp.R;
 import com.google.android.material.textfield.TextInputEditText;
 
-import java.util.regex.Pattern;
-
 public class LoginActivity extends AppCompatActivity {
 
     LinearLayout signup_layout, login_layout;
@@ -106,15 +104,15 @@ public class LoginActivity extends AppCompatActivity {
     private void loginUser(String email, String password) {
         if(Patterns.EMAIL_ADDRESS.matcher(email).matches() && !password.isEmpty() && password.length()>8)
         {
-            Cursor c = db.showUser(email, password);
+            Cursor c = db.signInUserWithEmailAndPassword(email, password);
             if(c!=null && c.getCount()>0)
             {
                 c.moveToFirst();
-                String e = c.getString(c.getColumnIndex(DB_Handler.EMAIL));
-                String p = c.getString(c.getColumnIndex(DB_Handler.PASSWORD));
+                String e = c.getString(c.getColumnIndex(DB_Handler.USER_EMAIL));
+                String p = c.getString(c.getColumnIndex(DB_Handler.USER_PASSWORD));
 
-                prefManger.setStringValues(DB_Handler.EMAIL, e);
-                prefManger.setStringValues(DB_Handler.PASSWORD, p);
+                prefManger.setStringValues(DB_Handler.USER_EMAIL, e);
+                prefManger.setStringValues(DB_Handler.USER_PASSWORD, p);
                 prefManger.setLoggedIn(PrefManger.USER_LOGIN, true);
 
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
@@ -131,7 +129,7 @@ public class LoginActivity extends AppCompatActivity {
         {
             if(!Patterns.EMAIL_ADDRESS.matcher(email).matches() || email.isEmpty())
             {
-                edl_email.setError("Please Enter Valid Email ID");
+                edl_email.setError("Please Enter Valid Email USER_ID");
                 edl_email.requestFocus();
             }
             else if(password.isEmpty())
@@ -163,7 +161,7 @@ public class LoginActivity extends AppCompatActivity {
             }
             else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches() || email.isEmpty())
             {
-                edr_email.setError("Please Enter Valid Email ID");
+                edr_email.setError("Please Enter Valid Email USER_ID");
                 edr_email.requestFocus();
             }
             else if(password.isEmpty())
