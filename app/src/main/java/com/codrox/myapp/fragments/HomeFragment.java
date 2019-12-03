@@ -37,6 +37,7 @@ public class HomeFragment extends Fragment {
 
     String ar[] = {"Please Choose City"};
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

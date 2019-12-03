@@ -54,10 +54,4 @@ public class ClassFragment extends Fragment {
         });
         return v;
     }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        MainActivity.navigationItemView.getMenu().findItem(R.id.nav_home).setChecked(true);
-    }
 }

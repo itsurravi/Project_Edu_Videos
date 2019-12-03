@@ -78,7 +78,6 @@ public class ProfileAdapter extends BaseAdapter {
                 break;
         }
 
-
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -155,6 +154,7 @@ public class ProfileAdapter extends BaseAdapter {
         );
 
         l.set(0, info);
+        prefManger.setStringValues(DB_Handler.USER_EMAIL, info.getEmail());
         txt_name.setText(l.get(0).getName());
         notifyDataSetChanged();
     }

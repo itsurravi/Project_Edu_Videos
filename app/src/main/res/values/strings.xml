@@ -41,6 +41,40 @@
         <item>Ajmer</item>
     </array>
 
+    <!--Subjects List-->
+
+    <array name="subjects_ix">
+        <item>English</item>
+        <item>Hindi</item>
+        <item>Maths</item>
+        <item>Science</item>
+        <item>Social Science</item>
+    </array>
+
+    <array name="subjects_x">
+        <item>English</item>
+        <item>Hindi</item>
+        <item>Maths</item>
+        <item>Science</item>
+        <item>Social Science</item>
+    </array>
+
+    <array name="subjects_xi">
+        <item>English</item>
+        <item>Hindi</item>
+        <item>Maths</item>
+        <item>Science</item>
+        <item>Social Science</item>
+    </array>
+
+    <array name="subjects_xii">
+        <item>English</item>
+        <item>Hindi</item>
+        <item>Maths</item>
+        <item>Science</item>
+        <item>Social Science</item>
+    </array>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_login">Sign in</string>
