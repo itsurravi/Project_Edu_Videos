@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import com.codrox.myapp.Activity.MainActivity;
 import com.codrox.myapp.R;
 
 import static com.codrox.myapp.Activity.MainActivity.BACK_STACK_ROOT_TAG;
+import static com.codrox.myapp.Activity.MainActivity.TAG;
 
 public class HomeFragment extends Fragment {
 

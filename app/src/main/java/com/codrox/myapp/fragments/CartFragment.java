@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +14,14 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.codrox.myapp.Activity.MainActivity;
 import com.codrox.myapp.Models.Subjects;
 import com.codrox.myapp.R;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.codrox.myapp.Activity.MainActivity.TAG;
 
 /**
  * A simple {@link Fragment} subclass.

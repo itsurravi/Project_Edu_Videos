@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/img_app_logo"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="10dp"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -80,7 +80,7 @@
                 android:id="@+id/txt_sign_up"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="40dp"
+                android:layout_marginTop="20dp"
                 android:text="Not Registered??? Sign Up Here"
                 android:textColor="#fff"
                 android:textSize="16dp" />
@@ -92,7 +92,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/img_app_logo"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="10dp"
             android:gravity="center"
             android:orientation="vertical"
             android:visibility="gone">
@@ -166,11 +166,13 @@
                 android:id="@+id/txt_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="40dp"
+                android:layout_marginTop="20dp"
                 android:text="Already Registered??? Sign In"
                 android:textColor="#fff"
                 android:textSize="16dp" />
 
         </LinearLayout>
+
     </RelativeLayout>
+
 </ScrollView>

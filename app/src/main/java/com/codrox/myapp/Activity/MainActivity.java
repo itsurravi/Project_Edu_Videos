@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     public static final String BACK_STACK_ROOT_TAG = "root_fragment";
 
+    public final static String TAG="myTAG";
+
     public static BottomNavigationView navigationItemView;
     private PrefManger prefManger;
 
@@ -47,7 +49,34 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     public void onBackPressed() {
         FragmentManager manager = getSupportFragmentManager();
         if (manager.getBackStackEntryCount() > 1) {
-            manager.popBackStack();
+            manager.popBackStackImmediate();
+
+            Fragment f = manager.getPrimaryNavigationFragment();
+            if(f!=null)
+            {
+                String home = HomeFragment.class.getSimpleName();
+                String cart = CartFragment.class.getSimpleName();
+                String lib = LibraryFragment.class.getSimpleName();
+                String acc = AccountFragment.class.getSimpleName();
+
+                if(f.getTag().equals(home))
+                {
+                    navigationItemView.getMenu().findItem(R.id.nav_home).setChecked(true);
+                }
+                else if(f.getTag().equals(cart))
+                {
+                    navigationItemView.getMenu().findItem(R.id.nav_cart).setChecked(true);
+                }
+                else if(f.getTag().equals(lib))
+                {
+                    navigationItemView.getMenu().findItem(R.id.nav_lib).setChecked(true);
+                }
+                else if(f.getTag().equals(acc))
+                {
+                    navigationItemView.getMenu().findItem(R.id.nav_account).setChecked(true);
+                }
+            }
+
         } else {
             finish();
         }

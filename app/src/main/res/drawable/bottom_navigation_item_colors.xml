@@ -4,5 +4,5 @@
     <item android:state_checked="true"
         android:color="@color/colorNavSelected"/>
     <item android:state_checked="false"
-        android:color="@color/colorNavSelected"/>
+        android:color="@color/colorNav"/>
 </selector>

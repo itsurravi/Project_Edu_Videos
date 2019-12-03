@@ -29,6 +29,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#D3D3D3"
         android:orientation="horizontal"
         android:padding="@dimen/padding_10dp">
 
@@ -44,8 +45,10 @@
             android:id="@+id/btn_comment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="comment" />
-
+            android:layout_gravity="bottom"
+            android:background="@drawable/btn_login_background"
+            android:text="post"
+            android:textColor="#01AF18" />
 
     </LinearLayout>
 </LinearLayout>

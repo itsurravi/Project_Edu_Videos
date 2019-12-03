@@ -68,15 +68,44 @@ public class DB_Handler extends SQLiteOpenHelper {
         return true;
     }
 
-    public boolean updateUserInfo(String id, String name, String uname, String pswd) {
+    public boolean updateUserName(String id, String name) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
         cv.put(USER_NAME, name);
+
+        int res = db.update(TABLE_USER, cv, "id=?", new String[]{id});
+        db.close();
+        if (res > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean updateUserEmail(String id, String uname) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
         cv.put(USER_EMAIL, uname);
+
+        int res = db.update(TABLE_USER, cv, "id=?", new String[]{id});
+        db.close();
+        if (res > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean updateUserPassword(String id, String pswd) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
         cv.put(USER_PASSWORD, pswd);
 
         int res = db.update(TABLE_USER, cv, "id=?", new String[]{id});
+        db.close();
         if (res > 0) {
             return true;
         } else {
@@ -123,12 +152,11 @@ public class DB_Handler extends SQLiteOpenHelper {
 
     public List<String> getComments(String id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String sql = "SELECT * FROM "+ TABLE_COMMENTS +" WHERE "+COMMENT_USER_ID+"='"+id+"';";
+        String sql = "SELECT * FROM " + TABLE_COMMENTS + " WHERE " + COMMENT_USER_ID + "='" + id + "';";
         Cursor c = db.rawQuery(sql, null);
         List<String> l = new ArrayList<>();
         try {
-            if(c!=null)
-            {
+            if (c != null) {
                 c.moveToFirst();
                 do {
                     l.add(c.getString(c.getColumnIndex(COMMENT)));
@@ -137,9 +165,7 @@ public class DB_Handler extends SQLiteOpenHelper {
                 c.close();
             }
             return l;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             return null;
         }
     }
