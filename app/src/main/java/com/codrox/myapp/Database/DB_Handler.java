@@ -15,7 +15,6 @@ import java.util.List;
 
 public class DB_Handler extends SQLiteOpenHelper {
 
-
     public final String TAG = "SQL_Query";
 
     public static final String DB_NAME = "UserDB";
@@ -283,4 +282,6 @@ public class DB_Handler extends SQLiteOpenHelper {
         }
         return list;
     }
+
+
 }
