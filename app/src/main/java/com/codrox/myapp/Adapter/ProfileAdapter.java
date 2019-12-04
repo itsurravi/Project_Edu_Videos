@@ -3,6 +3,7 @@ package com.codrox.myapp.Adapter;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -123,17 +124,32 @@ public class ProfileAdapter extends BaseAdapter {
                 DB_Handler db = new DB_Handler(c);
                 switch (position) {
                     case 0:
-                        db.updateUserName(userInfo.get(0).getId(), finalValue);
+                        if(finalValue.length()!=0 && !finalValue.isEmpty())
+                        {
+                            db.updateUserName(userInfo.get(0).getId(), finalValue);
+                            updateData();
+                            ad.dismiss();
+                        }
+                        else
+                        ed.setError("Please Enter Your Name");
                         break;
                     case 1:
-                        db.updateUserEmail(userInfo.get(0).getId(), finalValue);
+                        if (Patterns.EMAIL_ADDRESS.matcher(finalValue).matches()) {
+                            db.updateUserEmail(userInfo.get(0).getId(), finalValue);
+                            updateData();
+                            ad.dismiss();
+                        } else
+                            ed.setError("Please enter Valid Email Address");
                         break;
                     case 2:
-                        db.updateUserPassword(userInfo.get(0).getId(), finalValue);
+                        if (finalValue.length() > 8) {
+                            db.updateUserPassword(userInfo.get(0).getId(), finalValue);
+                            updateData();
+                            ad.dismiss();
+                        } else
+                            ed.setError("Password must be of 8 or more characters");
                         break;
                 }
-                updateData();
-                ad.dismiss();
             }
         });
     }

@@ -7,45 +7,40 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.codrox.myapp.Models.TopicsInfo;
 import com.codrox.myapp.R;
 
-import java.util.List;
-
-public class VideoLibraryAdapter extends BaseAdapter {
+public class ChaptersAdapter extends BaseAdapter {
 
     Context c;
-    List<TopicsInfo> list;
+    String chapters[];
 
-    public VideoLibraryAdapter(Context c, List<TopicsInfo> list) {
+    public ChaptersAdapter(Context c, String[] chapters) {
         this.c = c;
-        this.list = list;
+        this.chapters = chapters;
     }
 
     @Override
     public int getCount() {
-        return list.size();
+        return chapters.length;
     }
 
     @Override
     public Object getItem(int position) {
-        return list.get(position);
+        return chapters[position];
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater li = LayoutInflater.from(c);
+        View v = li.inflate(R.layout.adapter_chapters_list, null);
 
-        View v = li.inflate(R.layout.adapter_video_library, parent, false);
-
-        TextView tv = v.findViewById(R.id.txt_subject);
-
-        tv.setText(list.get(position).getTitle());
+        TextView tv = v.findViewById(R.id.txt_chapters);
+        tv.setText(chapters[position]);
 
         return v;
     }

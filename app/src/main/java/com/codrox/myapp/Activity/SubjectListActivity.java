@@ -4,12 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.codrox.myapp.Adapter.SubjectListAdapter;
 import com.codrox.myapp.R;
+import com.codrox.myapp.fragments.ChaptersFragment;
 
 public class SubjectListActivity extends AppCompatActivity {
 
@@ -48,5 +51,20 @@ public class SubjectListActivity extends AppCompatActivity {
         SubjectListAdapter ad = new SubjectListAdapter(this, subjects);
 
         lv.setAdapter(ad);
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ChaptersFragment cf = new ChaptersFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("subject", subjects[position]);
+
+                cf.setArguments(bundle);
+                Toast.makeText(SubjectListActivity.this, subjects[position], Toast.LENGTH_SHORT).show();
+
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.subject_container, cf).addToBackStack(null).commit();
+            }
+        });
     }
 }

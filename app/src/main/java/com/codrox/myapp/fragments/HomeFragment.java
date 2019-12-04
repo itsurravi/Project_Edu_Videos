@@ -113,6 +113,7 @@ public class HomeFragment extends Fragment {
         final FragmentManager manager = getFragmentManager();
 //        manager.popBackStack(BACK_STACK_ROOT_TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         FragmentTransaction transaction = manager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.slide_right_enter, R.anim.slide_left_exit,R.anim.slide_pop_enter, R.anim.slide_pop_exit);
         transaction.add( R.id.fragment_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();

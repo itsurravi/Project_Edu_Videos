@@ -111,6 +111,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         FragmentManager mFragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
 
+        fragmentTransaction.setCustomAnimations(R.anim.slide_right_enter, R.anim.slide_left_exit,R.anim.slide_pop_enter, R.anim.slide_pop_exit);
+
         Fragment currentFragment = mFragmentManager.getPrimaryNavigationFragment();
         if (currentFragment != null) {
             fragmentTransaction.hide(currentFragment);

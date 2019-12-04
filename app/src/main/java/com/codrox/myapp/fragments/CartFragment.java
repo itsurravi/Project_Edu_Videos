@@ -15,7 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.codrox.myapp.Activity.MainActivity;
-import com.codrox.myapp.Models.Subjects;
+import com.codrox.myapp.Models.TopicsInfo;
 import com.codrox.myapp.R;
 
 import java.util.ArrayList;
@@ -38,7 +38,7 @@ public class CartFragment extends Fragment {
     TextView txt_total, txt_gst, txt_total_pay;
     Button btn_pay;
 
-    List<Subjects> list;
+    List<TopicsInfo> list;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

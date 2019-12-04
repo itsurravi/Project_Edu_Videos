@@ -21,7 +21,7 @@ import android.widget.Toast;
 import com.codrox.myapp.Activity.MainActivity;
 import com.codrox.myapp.Activity.VideoPlayerActivity;
 import com.codrox.myapp.Adapter.VideoLibraryAdapter;
-import com.codrox.myapp.Models.Subjects;
+import com.codrox.myapp.Models.TopicsInfo;
 import com.codrox.myapp.R;
 
 import java.util.ArrayList;
@@ -38,7 +38,7 @@ public class LibraryFragment extends Fragment {
     }
 
     ListView video_list;
-    List<Subjects> list;
+    List<TopicsInfo> list;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,7 +50,7 @@ public class LibraryFragment extends Fragment {
 
         for(int i=0;i<10;i++)
         {
-            list.add(new Subjects("Video => "+(i+1), ((200*i)+(i*3))/4));
+            list.add(new TopicsInfo(String.valueOf(i), "Video => "+(i+1), String.valueOf(((200*i)+(i*3))/4)));
         }
 
         VideoLibraryAdapter adapter = new VideoLibraryAdapter(getContext(), list);
