@@ -1,6 +1,7 @@
 package com.codrox.myapp.fragments;
 
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -15,6 +16,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.codrox.myapp.Activity.MainActivity;
+import com.codrox.myapp.Adapter.CartListAdapter;
+import com.codrox.myapp.Database.DB_Handler;
+import com.codrox.myapp.Database.PrefManger;
+import com.codrox.myapp.Models.CartItems;
 import com.codrox.myapp.Models.TopicsInfo;
 import com.codrox.myapp.R;
 
@@ -38,7 +43,7 @@ public class CartFragment extends Fragment {
     TextView txt_total, txt_gst, txt_total_pay;
     Button btn_pay;
 
-    List<TopicsInfo> list;
+    public List<CartItems> list=new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,6 +54,8 @@ public class CartFragment extends Fragment {
         list = new ArrayList<>();
 
         initialize(v);
+
+        new FetchCartData();
 
         btn_pay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,5 +75,36 @@ public class CartFragment extends Fragment {
         txt_gst = v.findViewById(R.id.txt_gst);
         txt_total_pay = v.findViewById(R.id.txt_total_pay);
         btn_pay = v.findViewById(R.id.btn_pay);
+    }
+
+    class FetchCartData extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            PrefManger prefManger = new PrefManger(getContext());
+            DB_Handler db = new DB_Handler(getContext());
+
+            list.clear();
+
+            list = db.getAllCartItems(prefManger.getStringValues(DB_Handler.USER_EMAIL));
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            if(list.size()>0) {
+                cart_layout.setVisibility(View.VISIBLE);
+                no_item_layout.setVisibility(View.GONE);
+                CartListAdapter cla = new CartListAdapter(getContext(), list);
+                cart_list.setAdapter(cla);
+            }
+            else
+            {
+                cart_layout.setVisibility(View.GONE);
+                no_item_layout.setVisibility(View.VISIBLE);
+            }
+        }
     }
 }

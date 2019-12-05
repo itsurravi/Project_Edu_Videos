@@ -8,28 +8,28 @@
 
     <LinearLayout
         android:id="@+id/layout_no_item"
-        android:gravity="center"
-        android:background="#fff"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#fff"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/noitemlogo"/>
+            android:src="@drawable/noitemlogo" />
 
         <TextView
-            android:textSize="20dp"
-            android:text="No Item in Cart Found"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="No Item in Cart Found"
+            android:textSize="20dp" />
 
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/cart_layout"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -40,8 +40,8 @@
             android:id="@+id/cart_list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:divider="@android:color/transparent"
-            android:layout_weight="2" />
+            android:layout_weight="2"
+            android:divider="@android:color/transparent" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -136,7 +136,9 @@
                 android:id="@+id/btn_pay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Pay" />
+                android:background="@drawable/btn_background"
+                android:text="Pay"
+                android:textColor="#fff" />
 
         </LinearLayout>
 

@@ -9,8 +9,11 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.codrox.myapp.Database.DB_Handler;
+import com.codrox.myapp.Database.PrefManger;
 import com.codrox.myapp.Models.TopicsInfo;
 import com.codrox.myapp.R;
+import com.codrox.myapp.fragments.CartFragment;
 
 import java.util.List;
 
@@ -57,7 +60,10 @@ public class TopicsAdapter extends BaseAdapter {
         btn_addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(c, topicsInfo.getPrice(), Toast.LENGTH_SHORT).show();
+                PrefManger prefManger = new PrefManger(c);
+                DB_Handler db = new DB_Handler(c);
+                db.saveToCart(topicsInfo.getId(), prefManger.getStringValues(DB_Handler.USER_EMAIL));
+                Toast.makeText(c, "Added to Cart", Toast.LENGTH_SHORT).show();
             }
         });
 

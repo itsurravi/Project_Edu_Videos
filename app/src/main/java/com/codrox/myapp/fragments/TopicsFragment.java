@@ -1,6 +1,8 @@
 package com.codrox.myapp.fragments;
 
 
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,8 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.codrox.myapp.Adapter.ChaptersAdapter;
 import com.codrox.myapp.Adapter.TopicsAdapter;
+import com.codrox.myapp.Database.DB_Handler;
 import com.codrox.myapp.Models.TopicsInfo;
 import com.codrox.myapp.R;
 
@@ -34,23 +39,9 @@ public class TopicsFragment extends Fragment {
 
     List<TopicsInfo> topicsInfo;
 
-    String topics[] = {
-            "Topic 1",
-            "Topic 2",
-            "Topic 3",
-            "Topic 4",
-            "Topic 5",
-            "Topic 6"
-    };
-
-    String price[] = {
-            "120",
-            "120",
-            "120",
-            "120",
-            "120",
-            "120"
-    };
+    String chapter = "";
+    String subject = "";
+    String className = "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,17 +50,49 @@ public class TopicsFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_topics, container, false);
         list_topics = v.findViewById(R.id.list_topics);
         chapter_name = v.findViewById(R.id.txt_chapter_name);
-        final String chapter = getArguments().getString("chapter");
-        chapter_name.setText(chapter);
-        topicsInfo = new ArrayList<>();
-        for (int i = 0; i < topics.length; i++) {
-            topicsInfo.add(new TopicsInfo(String.valueOf(i), topics[i], price[i]));
-        }
 
-        TopicsAdapter ad = new TopicsAdapter(getContext(), topicsInfo);
-        list_topics.setAdapter(ad);
+        chapter = getArguments().getString("chapter");
+        subject = getArguments().getString("subject");
+        className = getArguments().getString("className");
+
+        chapter_name.setText(subject + " => " + chapter);
+
+        new TopicsFetch().execute();
 
         return v;
+    }
+
+    class TopicsFetch extends AsyncTask<Void, Void, Void> {
+        ProgressDialog pd = new ProgressDialog(getContext());
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pd.setCancelable(false);
+            pd.setMessage("Please Wait");
+            pd.show();
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            DB_Handler db = new DB_Handler(getContext());
+
+            topicsInfo = db.getTopicsList(className, subject, chapter);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            pd.dismiss();
+            if (topicsInfo.size() > 0) {
+                TopicsAdapter ad = new TopicsAdapter(getContext(), topicsInfo);
+                list_topics.setAdapter(ad);
+            } else {
+                Toast.makeText(getContext(), "No Chapter Found", Toast.LENGTH_SHORT).show();
+            }
+
+        }
     }
 
 }

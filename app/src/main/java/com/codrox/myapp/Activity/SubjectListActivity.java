@@ -29,7 +29,7 @@ public class SubjectListActivity extends AppCompatActivity {
         lv = findViewById(R.id.list_subject);
 
         Intent i = getIntent();
-        String className = i.getStringExtra("className");
+        final String className = i.getStringExtra("className");
 
         setTitle(className);
 
@@ -58,6 +58,7 @@ public class SubjectListActivity extends AppCompatActivity {
                 ChaptersFragment cf = new ChaptersFragment();
                 Bundle bundle = new Bundle();
                 bundle.putString("subject", subjects[position]);
+                bundle.putString("className", className);
 
                 cf.setArguments(bundle);
                 Toast.makeText(SubjectListActivity.this, subjects[position], Toast.LENGTH_SHORT).show();

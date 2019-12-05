@@ -7,26 +7,29 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.codrox.myapp.Models.TopicsInfo;
 import com.codrox.myapp.R;
+
+import java.util.List;
 
 public class ChaptersAdapter extends BaseAdapter {
 
     Context c;
-    String chapters[];
+    List<String> chapters;
 
-    public ChaptersAdapter(Context c, String[] chapters) {
+    public ChaptersAdapter(Context c, List<String> chapters) {
         this.c = c;
         this.chapters = chapters;
     }
 
     @Override
     public int getCount() {
-        return chapters.length;
+        return chapters.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return chapters[position];
+        return chapters.get(position);
     }
 
     @Override
@@ -40,7 +43,7 @@ public class ChaptersAdapter extends BaseAdapter {
         View v = li.inflate(R.layout.adapter_chapters_list, null);
 
         TextView tv = v.findViewById(R.id.txt_chapters);
-        tv.setText(chapters[position]);
+        tv.setText(chapters.get(position));
 
         return v;
     }

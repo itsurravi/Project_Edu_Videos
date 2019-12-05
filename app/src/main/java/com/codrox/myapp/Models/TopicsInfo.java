@@ -6,33 +6,23 @@ public class TopicsInfo {
     private String subject;
     private String chapter;
     private String title;
+    private String subtitle;
     private String price;
+    private String videoUrl;
 
-    public TopicsInfo(String id, String className, String subject, String chapter, String title, String price) {
+    public TopicsInfo(String id, String className, String subject, String chapter, String title, String subtitle, String price, String videoUrl) {
         this.id = id;
         this.className = className;
         this.subject = subject;
         this.chapter = chapter;
         this.title = title;
+        this.subtitle = subtitle;
         this.price = price;
-    }
-
-    public TopicsInfo(String id, String title, String price) {
-        this.id = id;
-        this.title = title;
-        this.price = price;
+        this.videoUrl = videoUrl;
     }
 
     public String getId() {
         return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getPrice() {
-        return price;
     }
 
     public String getClassName() {
@@ -45,5 +35,21 @@ public class TopicsInfo {
 
     public String getChapter() {
         return chapter;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getSubtitle() {
+        return subtitle;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public String getVideoUrl() {
+        return videoUrl;
     }
 }
