@@ -13,16 +13,15 @@ import com.codrox.myapp.Database.DB_Handler;
 import com.codrox.myapp.Database.PrefManger;
 import com.codrox.myapp.Models.TopicsInfo;
 import com.codrox.myapp.R;
-import com.codrox.myapp.fragments.CartFragment;
 
 import java.util.List;
 
 public class TopicsAdapter extends BaseAdapter {
 
     Context c;
-    List<TopicsInfo> list;
+    List<String> list;
 
-    public TopicsAdapter(Context c, List<TopicsInfo> list) {
+    public TopicsAdapter(Context c, List<String> list) {
         this.c = c;
         this.list = list;
     }
@@ -48,24 +47,9 @@ public class TopicsAdapter extends BaseAdapter {
 
         View v = li.inflate(R.layout.adapter_topics,null);
 
-        TextView txt_title = v.findViewById(R.id.txt_topic_title);
-        TextView txt_price = v.findViewById(R.id.txt_topic_price);
-        ImageButton btn_addToCart = v.findViewById(R.id.btn_add_cart);
+        TextView txt_topics = v.findViewById(R.id.txt_topics);
 
-        final TopicsInfo topicsInfo = list.get(position);
-
-        txt_title.setText(topicsInfo.getTitle());
-        txt_price.setText(topicsInfo.getPrice());
-
-        btn_addToCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PrefManger prefManger = new PrefManger(c);
-                DB_Handler db = new DB_Handler(c);
-                db.saveToCart(topicsInfo.getId(), prefManger.getStringValues(DB_Handler.USER_EMAIL));
-                Toast.makeText(c, "Added to Cart", Toast.LENGTH_SHORT).show();
-            }
-        });
+        txt_topics.setText(list.get(position));
 
         return v;
     }

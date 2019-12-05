@@ -17,7 +17,6 @@ import android.widget.Toast;
 
 import com.codrox.myapp.Adapter.ChaptersAdapter;
 import com.codrox.myapp.Database.DB_Handler;
-import com.codrox.myapp.Models.TopicsInfo;
 import com.codrox.myapp.R;
 
 import java.util.List;

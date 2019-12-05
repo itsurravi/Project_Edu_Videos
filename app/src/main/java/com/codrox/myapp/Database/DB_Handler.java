@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
 import android.util.Log;
 
 import com.codrox.myapp.Models.CartItems;
@@ -59,9 +60,11 @@ public class DB_Handler extends SQLiteOpenHelper {
     public static final String VIDEO_USER_ID = "user_id";
     public static final String VIDEO_TOPIC_ID = "topic_id";
 
+    Context c;
 
     public DB_Handler(Context context) {
         super(context, DB_NAME, null, 1);
+        this.c = context;
     }
 
     @Override
@@ -120,35 +123,93 @@ public class DB_Handler extends SQLiteOpenHelper {
     }
 
 
+    private String getVideoUri(String video_name) {
+        String packagename = c.getPackageName();
+        int resourceid = c.getResources().getIdentifier(video_name, "raw", packagename);
+        return String.valueOf(Uri.parse("android.resource://" + packagename + "/" + resourceid));
+    }
+
     /*-------------------------------Chapter Topics TABLE-----------------------------*/
     private void insertTopics(SQLiteDatabase db) {
-        String sql = "INSERT INTO `topic` (`topic_id`, `class`, `subject`, `chapter`, `topic_name`,`sub_topic_name`, `topic_price`, `topic_video_url`) VALUES" +
-                "(1, 'Class 9', 'Hindi', 'Chapter 1', 'pehla 1 paath', 'Subtopic 1', '123', 'abcdabcd')," +
-                "(2, 'Class 9', 'Hindi', 'Chapter 1', 'pehla 2 paath', 'Subtopic 12','124', 'abcdabcd')," +
-                "(3, 'Class 9', 'Hindi', 'Chapter 1', 'pehla 3 paath', 'Subtopic 13','125', 'abcdabcd')," +
-                "(4, 'Class 9', 'Hindi', 'Chapter 2', 'pehla 4 paath', 'Subtopic 1','126', 'abcdabcd')," +
-                "(5, 'Class 9', 'Hindi', 'Chapter 2', 'pehla 5 paath', 'Subtopic 12','127', 'abcdabcd')," +
-                "(6, 'Class 9', 'Hindi', 'Chapter 3', 'pehla 6 paath', 'Subtopic 1','128', 'abcdabcd')," +
-                "(7, 'Class 9', 'Hindi', 'Chapter 3', 'pehla 7 paath', 'Subtopic 12','129', 'abcdabcd')," +
-                "(8, 'Class 10', 'Hindi', 'Chapter 1', 'pehla 1 paath', 'Subtopic 1','130', 'abcdabcd')," +
-                "(9, 'Class 10', 'Hindi', 'Chapter 1', 'pehla 2 paath', 'Subtopic 12','131', 'abcdabcd')," +
-                "(10, 'Class 10', 'Hindi', 'Chapter 2', 'pehla 3 paath', 'Subtopic 1','132', 'abcdabcd')," +
-                "(11, 'Class 10', 'Hindi', 'Chapter 2', 'pehla 4 paath', 'Subtopic 12','133', 'abcdabcd')," +
-                "(12, 'Class 10', 'Hindi', 'Chapter 2', 'pehla 5 paath', 'Subtopic 13','134', 'abcdabcd')," +
-                "(13, 'Class 10', 'Hindi', 'Chapter 2', 'pehla 6 paath', 'Subtopic 14','135', 'abcdabcd')," +
-                "(14, 'Class 10', 'Hindi', 'Chapter 3', 'pehla 7 paath', 'Subtopic 1','136', 'abcdabcd')," +
-                "(15, 'Class 10', 'Hindi', 'Chapter 3', 'pehla 8 paath', 'Subtopic 12','137', 'abcdabcd')," +
-                "(16, 'Class 10', 'Hindi', 'Chapter 3', 'pehla 9 paath', 'Subtopic 13','138', 'abcdabcd')," +
-                "(17, 'Class 11', 'Hindi', 'Chapter 1', 'pehla 1 paath', 'Subtopic 1','139', 'abcdabcd')," +
-                "(18, 'Class 11', 'Hindi', 'Chapter 1', 'pehla 2 paath', 'Subtopic 12','140', 'abcdabcd')," +
-                "(19, 'Class 11', 'Hindi', 'Chapter 1', 'pehla 3 paath', 'Subtopic 13','141', 'abcdabcd')," +
-                "(20, 'Class 11', 'Hindi', 'Chapter 2', 'pehla 4 paath', 'Subtopic 1','142', 'abcdabcd')," +
-                "(21, 'Class 11', 'Hindi', 'Chapter 2', 'pehla 5 paath', 'Subtopic 12','143', 'abcdabcd')," +
-                "(22, 'Class 11', 'Hindi', 'Chapter 2', 'pehla 6 paath', 'Subtopic 13','144', 'abcdabcd')," +
-                "(23, 'Class 12', 'Hindi', 'Chapter 1', 'pehla 1 paath', 'Subtopic 1','145', 'abcdabcd')," +
-                "(24, 'Class 12', 'Hindi', 'Chapter 1', 'pehla 2 paath', 'Subtopic 12','146', 'abcdabcd')," +
-                "(25, 'Class 12', 'Hindi', 'Chapter 1', 'pehla 3 paath', 'Subtopic 13','147', 'abcdabcd')," +
-                "(26, 'Class 12', 'Hindi', 'Chapter 1', 'pehla 4 paath', 'Subtopic 14','148', 'abcdabcd');";
+        String sql = "INSERT INTO `topic` (`topic_id`, `class`, `subject`, `chapter`, `topic_name`, `sub_topic_name`, `topic_price`, `topic_video_url`) VALUES" +
+                "(1, 'Class 9', 'Hindi', 'Chapter 1', 'Topic 1', 'SubTopic 1', '123', '" + getVideoUri("video") + "')," +
+                "(2, 'Class 9', 'Hindi', 'Chapter 1', 'Topic 1', 'SubTopic 2', '123', '" + getVideoUri("video") + "')," +
+                "(3, 'Class 9', 'Hindi', 'Chapter 1', 'Topic 1', 'SubTopic 3', '123', '" + getVideoUri("video") + "')," +
+                "(4, 'Class 9', 'Hindi', 'Chapter 1', 'Topic 2', 'SubTopic 1', '124', '" + getVideoUri("video") + "')," +
+                "(5, 'Class 9', 'Hindi', 'Chapter 1', 'Topic 2', 'SubTopic 2', '124', '" + getVideoUri("video") + "')," +
+                "(6, 'Class 9', 'Hindi', 'Chapter 1', 'Topic 2', 'SubTopic 3', '124', '" + getVideoUri("video") + "')," +
+                "(7, 'Class 9', 'Hindi', 'Chapter 1', 'Topic 3', 'SubTopic 1', '125', '" + getVideoUri("video") + "')," +
+                "(8, 'Class 9', 'Hindi', 'Chapter 1', 'Topic 3', 'SubTopic 2', '125', '" + getVideoUri("video") + "')," +
+                "(9, 'Class 9', 'Hindi', 'Chapter 1', 'Topic 3', 'SubTopic 3', '125', '" + getVideoUri("video") + "')," +
+                "(10, 'Class 9', 'Hindi', 'Chapter 2', 'Topic 1', 'SubTopic 1', '126', '" + getVideoUri("video") + "')," +
+                "(11, 'Class 9', 'Hindi', 'Chapter 2', 'Topic 1', 'SubTopic 2', '126', '" + getVideoUri("video") + "')," +
+                "(12, 'Class 9', 'Hindi', 'Chapter 2', 'Topic 1', 'SubTopic 3', '126', '" + getVideoUri("video") + "')," +
+                "(13, 'Class 9', 'Hindi', 'Chapter 2', 'Topic 2', 'SubTopic 1', '127', '" + getVideoUri("video") + "')," +
+                "(14, 'Class 9', 'Hindi', 'Chapter 2', 'Topic 2', 'SubTopic 2', '127', '" + getVideoUri("video") + "')," +
+                "(15, 'Class 9', 'Hindi', 'Chapter 2', 'Topic 2', 'SubTopic 3', '127', '" + getVideoUri("video") + "')," +
+                "(16, 'Class 9', 'Hindi', 'Chapter 3', 'Topic 1', 'SubTopic 1', '128', '" + getVideoUri("video") + "')," +
+                "(17, 'Class 9', 'Hindi', 'Chapter 3', 'Topic 1', 'SubTopic 2', '128', '" + getVideoUri("video") + "')," +
+                "(18, 'Class 9', 'Hindi', 'Chapter 3', 'Topic 1', 'SubTopic 3', '128', '" + getVideoUri("video") + "')," +
+                "(19, 'Class 9', 'Hindi', 'Chapter 3', 'Topic 2', 'SubTopic 1', '129', '" + getVideoUri("video") + "')," +
+                "(20, 'Class 9', 'Hindi', 'Chapter 3', 'Topic 2', 'SubTopic 2', '129', '" + getVideoUri("video") + "')," +
+                "(21, 'Class 9', 'Hindi', 'Chapter 3', 'Topic 2', 'SubTopic 3', '129', '" + getVideoUri("video") + "')," +
+                "(22, 'Class 10', 'Hindi', 'Chapter 1', 'Topic 1', 'SubTopic 1', '130', '" + getVideoUri("video") + "')," +
+                "(23, 'Class 10', 'Hindi', 'Chapter 1', 'Topic 1', 'SubTopic 2', '130', '" + getVideoUri("video") + "')," +
+                "(24, 'Class 10', 'Hindi', 'Chapter 1', 'Topic 1', 'SubTopic 3', '130', '" + getVideoUri("video") + "')," +
+                "(25, 'Class 10', 'Hindi', 'Chapter 1', 'Topic 2', 'SubTopic 1', '131', '" + getVideoUri("video") + "')," +
+                "(26, 'Class 10', 'Hindi', 'Chapter 1', 'Topic 2', 'SubTopic 2', '131', '" + getVideoUri("video") + "')," +
+                "(27, 'Class 10', 'Hindi', 'Chapter 1', 'Topic 2', 'SubTopic 3', '131', '" + getVideoUri("video") + "')," +
+                "(28, 'Class 10', 'Hindi', 'Chapter 2', 'Topic 1', 'SubTopic 1', '132', '" + getVideoUri("video") + "')," +
+                "(29, 'Class 10', 'Hindi', 'Chapter 2', 'Topic 1', 'SubTopic 2', '132', '" + getVideoUri("video") + "')," +
+                "(30, 'Class 10', 'Hindi', 'Chapter 2', 'Topic 1', 'SubTopic 3', '132', '" + getVideoUri("video") + "')," +
+                "(31, 'Class 10', 'Hindi', 'Chapter 2', 'Topic 2', 'SubTopic 1', '133', '" + getVideoUri("video") + "')," +
+                "(32, 'Class 10', 'Hindi', 'Chapter 2', 'Topic 2', 'SubTopic 2', '133', '" + getVideoUri("video") + "')," +
+                "(33, 'Class 10', 'Hindi', 'Chapter 2', 'Topic 2', 'SubTopic 3', '133', '" + getVideoUri("video") + "')," +
+                "(34, 'Class 10', 'Hindi', 'Chapter 2', 'Topic 3', 'SubTopic 1', '134', '" + getVideoUri("video") + "')," +
+                "(35, 'Class 10', 'Hindi', 'Chapter 2', 'Topic 3', 'SubTopic 2', '134', '" + getVideoUri("video") + "')," +
+                "(36, 'Class 10', 'Hindi', 'Chapter 2', 'Topic 3', 'SubTopic 3', '134', '" + getVideoUri("video") + "')," +
+                "(37, 'Class 10', 'Hindi', 'Chapter 2', 'Topic 4', 'SubTopic 1', '135', '" + getVideoUri("video") + "')," +
+                "(38, 'Class 10', 'Hindi', 'Chapter 2', 'Topic 4', 'SubTopic 2', '135', '" + getVideoUri("video") + "')," +
+                "(39, 'Class 10', 'Hindi', 'Chapter 2', 'Topic 4', 'SubTopic 3', '135', '" + getVideoUri("video") + "')," +
+                "(40, 'Class 10', 'Hindi', 'Chapter 3', 'Topic 1', 'SubTopic 1', '136', '" + getVideoUri("video") + "')," +
+                "(41, 'Class 10', 'Hindi', 'Chapter 3', 'Topic 1', 'SubTopic 2', '136', '" + getVideoUri("video") + "')," +
+                "(42, 'Class 10', 'Hindi', 'Chapter 3', 'Topic 1', 'SubTopic 3', '136', '" + getVideoUri("video") + "')," +
+                "(43, 'Class 10', 'Hindi', 'Chapter 3', 'Topic 2', 'SubTopic 1', '137', '" + getVideoUri("video") + "')," +
+                "(44, 'Class 10', 'Hindi', 'Chapter 3', 'Topic 2', 'SubTopic 2', '137', '" + getVideoUri("video") + "')," +
+                "(45, 'Class 10', 'Hindi', 'Chapter 3', 'Topic 2', 'SubTopic 3', '137', '" + getVideoUri("video") + "')," +
+                "(46, 'Class 10', 'Hindi', 'Chapter 3', 'Topic 3', 'SubTopic 1', '138', '" + getVideoUri("video") + "')," +
+                "(47, 'Class 10', 'Hindi', 'Chapter 3', 'Topic 3', 'SubTopic 2', '138', '" + getVideoUri("video") + "')," +
+                "(48, 'Class 10', 'Hindi', 'Chapter 3', 'Topic 3', 'SubTopic 3', '138', '" + getVideoUri("video") + "')," +
+                "(49, 'Class 11', 'Hindi', 'Chapter 1', 'Topic 1', 'SubTopic 1', '139', '" + getVideoUri("video") + "')," +
+                "(50, 'Class 11', 'Hindi', 'Chapter 1', 'Topic 1', 'SubTopic 2', '139', '" + getVideoUri("video") + "')," +
+                "(51, 'Class 11', 'Hindi', 'Chapter 1', 'Topic 1', 'SubTopic 3', '139', '" + getVideoUri("video") + "')," +
+                "(52, 'Class 11', 'Hindi', 'Chapter 1', 'Topic 2', 'SubTopic 1', '140', '" + getVideoUri("video") + "')," +
+                "(53, 'Class 11', 'Hindi', 'Chapter 1', 'Topic 2', 'SubTopic 2', '140', '" + getVideoUri("video") + "')," +
+                "(54, 'Class 11', 'Hindi', 'Chapter 1', 'Topic 2', 'SubTopic 3', '140', '" + getVideoUri("video") + "')," +
+                "(55, 'Class 11', 'Hindi', 'Chapter 1', 'Topic 3', 'SubTopic 1', '141', '" + getVideoUri("video") + "')," +
+                "(56, 'Class 11', 'Hindi', 'Chapter 1', 'Topic 3', 'SubTopic 2', '141', '" + getVideoUri("video") + "')," +
+                "(57, 'Class 11', 'Hindi', 'Chapter 1', 'Topic 3', 'SubTopic 3', '141', '" + getVideoUri("video") + "')," +
+                "(58, 'Class 11', 'Hindi', 'Chapter 2', 'Topic 1', 'SubTopic 1', '142', '" + getVideoUri("video") + "')," +
+                "(59, 'Class 11', 'Hindi', 'Chapter 2', 'Topic 1', 'SubTopic 2', '142', '" + getVideoUri("video") + "')," +
+                "(60, 'Class 11', 'Hindi', 'Chapter 2', 'Topic 1', 'SubTopic 3', '142', '" + getVideoUri("video") + "')," +
+                "(61, 'Class 11', 'Hindi', 'Chapter 2', 'Topic 2', 'SubTopic 1', '143', '" + getVideoUri("video") + "')," +
+                "(62, 'Class 11', 'Hindi', 'Chapter 2', 'Topic 2', 'SubTopic 2', '143', '" + getVideoUri("video") + "')," +
+                "(63, 'Class 11', 'Hindi', 'Chapter 2', 'Topic 2', 'SubTopic 3', '143', '" + getVideoUri("video") + "')," +
+                "(64, 'Class 11', 'Hindi', 'Chapter 2', 'Topic 3', 'SubTopic 1', '144', '" + getVideoUri("video") + "')," +
+                "(65, 'Class 11', 'Hindi', 'Chapter 2', 'Topic 3', 'SubTopic 2', '144', '" + getVideoUri("video") + "')," +
+                "(66, 'Class 11', 'Hindi', 'Chapter 2', 'Topic 3', 'SubTopic 3', '144', '" + getVideoUri("video") + "')," +
+                "(67, 'Class 12', 'Hindi', 'Chapter 1', 'Topic 1', 'SubTopic 1', '145', '" + getVideoUri("video") + "')," +
+                "(68, 'Class 12', 'Hindi', 'Chapter 1', 'Topic 1', 'SubTopic 2', '145', '" + getVideoUri("video") + "')," +
+                "(69, 'Class 12', 'Hindi', 'Chapter 1', 'Topic 1', 'SubTopic 3', '145', '" + getVideoUri("video") + "')," +
+                "(70, 'Class 12', 'Hindi', 'Chapter 1', 'Topic 2', 'SubTopic 1', '146', '" + getVideoUri("video") + "')," +
+                "(71, 'Class 12', 'Hindi', 'Chapter 1', 'Topic 2', 'SubTopic 2', '146', '" + getVideoUri("video") + "')," +
+                "(72, 'Class 12', 'Hindi', 'Chapter 1', 'Topic 2', 'SubTopic 3', '146', '" + getVideoUri("video") + "')," +
+                "(73, 'Class 12', 'Hindi', 'Chapter 1', 'Topic 3', 'SubTopic 1', '147', '" + getVideoUri("video") + "')," +
+                "(74, 'Class 12', 'Hindi', 'Chapter 1', 'Topic 3', 'SubTopic 2', '147', '" + getVideoUri("video") + "')," +
+                "(75, 'Class 12', 'Hindi', 'Chapter 1', 'Topic 3', 'SubTopic 3', '147', '" + getVideoUri("video") + "')," +
+                "(76, 'Class 12', 'Hindi', 'Chapter 1', 'Topic 4', 'SubTopic 1', '148', '" + getVideoUri("video") + "')," +
+                "(77, 'Class 12', 'Hindi', 'Chapter 1', 'Topic 4', 'SubTopic 2', '148', '" + getVideoUri("video") + "')," +
+                "(78, 'Class 12', 'Hindi', 'Chapter 1', 'Topic 4', 'SubTopic 3', '148', '" + getVideoUri("video") + "');";
 
         db.execSQL(sql);
 
@@ -159,7 +220,8 @@ public class DB_Handler extends SQLiteOpenHelper {
         List<String> list = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String sql = "SELECT DISTINCT " + TOPIC_CHAPTER + " FROM " + TABLE_TOPIC + " WHERE " + TOPIC_CLASS + "='" + className + "' AND " + TOPIC_SUBJECT + "='" + subject + "';";
+        String sql = "SELECT DISTINCT " + TOPIC_CHAPTER + " FROM " + TABLE_TOPIC + " WHERE "
+                + TOPIC_CLASS + "='" + className + "' AND " + TOPIC_SUBJECT + "='" + subject + "';";
         Cursor c = db.rawQuery(sql, null);
         if (c.getCount() > 0) {
             c.moveToFirst();
@@ -175,11 +237,38 @@ public class DB_Handler extends SQLiteOpenHelper {
         return list;
     }
 
-    public List<TopicsInfo> getTopicsList(String className, String subject, String chapter) {
+    public List<String> getTopicTitleList(String className, String subject, String chapter) {
+        List<String> list = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String sql = "SELECT DISTINCT " + TOPIC_NAME + " FROM " + TABLE_TOPIC + " WHERE "
+                + TOPIC_CLASS + "='" + className + "' AND "
+                + TOPIC_CHAPTER + "='" + chapter + "' AND "
+                + TOPIC_SUBJECT + "='" + subject + "';";
+
+        Cursor c = db.rawQuery(sql, null);
+        if (c.getCount() > 0) {
+            c.moveToFirst();
+            do {
+
+                String t_chapter = c.getString(c.getColumnIndex(TOPIC_NAME));
+
+                list.add(t_chapter);
+            }
+            while (c.moveToNext());
+            c.close();
+        }
+        return list;
+    }
+
+    public List<TopicsInfo> getSubTopicsList(String className, String subject, String chapter, String topic) {
         List<TopicsInfo> list = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String sql = "SELECT * FROM " + TABLE_TOPIC + " WHERE " + TOPIC_CLASS + "='" + className + "' AND " + TOPIC_SUBJECT + "='" + subject + "' AND " + TOPIC_CHAPTER + "='" + chapter + "';";
+        String sql = "SELECT * FROM " + TABLE_TOPIC + " WHERE " + TOPIC_CLASS + "='" + className + "' AND "
+                + TOPIC_SUBJECT + "='" + subject + "' AND " + TOPIC_NAME + "='" + topic + "' AND "
+                + TOPIC_CHAPTER + "='" + chapter + "';";
+
         Cursor c = db.rawQuery(sql, null);
         if (c.getCount() > 0) {
             c.moveToFirst();
@@ -291,22 +380,22 @@ public class DB_Handler extends SQLiteOpenHelper {
 
 
     /*------------------------------USER COMMENT--------------------------------------*/
-    public void saveComment(String id, String comment/*,String topic_id*/  /*need to add video id here*/) {
+    public void saveComment(String id, String comment, String topic_id  /*need to add video id here*/) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
         cv.put(COMMENT_USER_ID, id);
         cv.put(COMMENT, comment);
-//        cv.put(COMMENT_TOPIC_ID, topic_id);
+        cv.put(COMMENT_TOPIC_ID, topic_id);
 
         db.insert(TABLE_COMMENTS, null, cv);
         db.close();
     }
 
-    public List<String> getComments(String id/*, String topic_id*/  /*need to add video id here*/) {
+    public List<String> getComments(String id, String topic_id  /*need to add video id here*/) {
         SQLiteDatabase db = this.getReadableDatabase();
-//        String sql = "SELECT * FROM " + TABLE_COMMENTS + " WHERE " + COMMENT_USER_ID + "='" + id + "' AND " + COMMENT_TOPIC_ID + "='" + topic_id + "';";
-        String sql = "SELECT * FROM " + TABLE_COMMENTS + " WHERE " + COMMENT_USER_ID + "='" + id + "';";
+        String sql = "SELECT * FROM " + TABLE_COMMENTS + " WHERE " + COMMENT_USER_ID + "='" + id + "' AND " + COMMENT_TOPIC_ID + "='" + topic_id + "';";
+//        String sql = "SELECT * FROM " + TABLE_COMMENTS + " WHERE " + COMMENT_USER_ID + "='" + id + "';";
         Cursor c = db.rawQuery(sql, null);
         List<String> l = new ArrayList<>();
         try {
@@ -345,13 +434,14 @@ public class DB_Handler extends SQLiteOpenHelper {
     public List<CartItems> getAllCartItems(String user_id) {
         List<CartItems> list = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        String sql = "select " + TABLE_CART + "." + CART_ID + ", "
+        String sql = "SELECT " + TABLE_CART + "." + CART_ID + ", "
                 + TABLE_TOPIC + "." + TOPIC_ID + ", "
                 + TABLE_TOPIC + "." + TOPIC_CLASS + ", "
                 + TABLE_TOPIC + "." + TOPIC_SUBJECT + ", "
                 + TABLE_TOPIC + "." + TOPIC_CHAPTER + ", "
                 + TABLE_TOPIC + "." + TOPIC_NAME + ", "
                 + TABLE_TOPIC + "." + TOPIC_SUBTOPIC_NAME + ", "
+                + TABLE_TOPIC + "." + TOPIC_VIDEO_URL + ", "
                 + TABLE_TOPIC + "." + TOPIC_PRICE + " FROM "
                 + TABLE_CART + " INNER JOIN " + TABLE_TOPIC + " ON "
                 + TABLE_CART + "." + CART_TOPIC_ID + "=" + TABLE_TOPIC + "." + TOPIC_ID + " WHERE "
@@ -408,6 +498,7 @@ public class DB_Handler extends SQLiteOpenHelper {
                 + TABLE_TOPIC + "." + TOPIC_CHAPTER + ", "
                 + TABLE_TOPIC + "." + TOPIC_NAME + ", "
                 + TABLE_TOPIC + "." + TOPIC_SUBTOPIC_NAME + ", "
+                + TABLE_TOPIC + "." + TOPIC_VIDEO_URL + ", "
                 + TABLE_TOPIC + "." + TOPIC_PRICE + " FROM "
                 + TABLE_VIDEO_LIB + " INNER JOIN " + TABLE_TOPIC + " ON "
                 + TABLE_VIDEO_LIB + "." + VIDEO_TOPIC_ID + "=" + TABLE_TOPIC + "." + TOPIC_ID + " WHERE "
@@ -425,7 +516,7 @@ public class DB_Handler extends SQLiteOpenHelper {
                 String t_sub = c.getString(c.getColumnIndex(TOPIC_SUBJECT));
                 String t_chapter = c.getString(c.getColumnIndex(TOPIC_CHAPTER));
                 String t_name = c.getString(c.getColumnIndex(TOPIC_NAME));
-                String t_s_name = c.getString(c.getColumnIndex(TOPIC_NAME));
+                String t_s_name = c.getString(c.getColumnIndex(TOPIC_SUBTOPIC_NAME));
                 String t_price = c.getString(c.getColumnIndex(TOPIC_PRICE));
 
                 String t_url = c.getString(c.getColumnIndex(TOPIC_VIDEO_URL));

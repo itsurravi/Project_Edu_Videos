@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.codrox.myapp.Models.TopicsInfo;
+import com.codrox.myapp.Models.VideoLib;
 import com.codrox.myapp.R;
 
 import java.util.List;
@@ -15,9 +16,9 @@ import java.util.List;
 public class VideoLibraryAdapter extends BaseAdapter {
 
     Context c;
-    List<TopicsInfo> list;
+    List<VideoLib> list;
 
-    public VideoLibraryAdapter(Context c, List<TopicsInfo> list) {
+    public VideoLibraryAdapter(Context c, List<VideoLib> list) {
         this.c = c;
         this.list = list;
     }
@@ -44,8 +45,10 @@ public class VideoLibraryAdapter extends BaseAdapter {
         View v = li.inflate(R.layout.adapter_video_library, parent, false);
 
         TextView tv = v.findViewById(R.id.txt_subject);
+        TextView topic = v.findViewById(R.id.txt_topic);
 
-        tv.setText(list.get(position).getTitle());
+        tv.setText(list.get(position).getTopicsInfo().getSubtitle());
+        topic.setText(list.get(position).getTopicsInfo().getTitle());
 
         return v;
     }

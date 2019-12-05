@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,6 +58,22 @@ public class AccountFragment extends Fragment {
         list_editProfile = v.findViewById(R.id.list_editProfile);
 
         l = new ArrayList<>();
+
+        btn_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                prefManger.setLoggedIn(PrefManger.USER_LOGIN, false);
+                startActivity(new Intent(getContext(), LoginActivity.class));
+                getActivity().finish();
+            }
+        });
+        return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d("FragmentPauseResume", AccountFragment.class.getSimpleName());
         Cursor c = db.getUserData(String.valueOf(db.getUserId(prefManger.getStringValues(DB_Handler.USER_EMAIL))));
 
         c.moveToFirst();
@@ -75,15 +92,5 @@ public class AccountFragment extends Fragment {
         list_editProfile.setAdapter(ad);
 
         txt_name.setText(l.get(0).getName());
-
-        btn_logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                prefManger.setLoggedIn(PrefManger.USER_LOGIN, false);
-                startActivity(new Intent(getContext(), LoginActivity.class));
-                getActivity().finish();
-            }
-        });
-        return v;
     }
 }
