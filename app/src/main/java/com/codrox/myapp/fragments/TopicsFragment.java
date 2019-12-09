@@ -11,16 +11,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.codrox.myapp.Adapter.SubTopicsAdapter;
+import com.codrox.myapp.Activity.MainActivity;
 import com.codrox.myapp.Adapter.TopicsAdapter;
 import com.codrox.myapp.Database.DB_Handler;
 import com.codrox.myapp.Models.TopicsInfo;
 import com.codrox.myapp.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,23 +36,29 @@ public class TopicsFragment extends Fragment {
         // Required empty public constructor
     }
 
-    ListView list_topics;
+    ExpandableListView list_topics;
     TextView chapter_name;
+    public static Button btn_gotocart;
 
-    List<String> topicsInfo;
+    List<TopicsInfo> topicsInfo;
+
+    public static List<String> topic;
 
     String chapter = "";
     String subject = "";
     String className = "";
+
+    private int lastExpandedPosition = -1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_topics, container, false);
-
+        topic = new ArrayList<>();
         list_topics = v.findViewById(R.id.list_topics);
         chapter_name = v.findViewById(R.id.txt_chapter_name);
+        btn_gotocart = v.findViewById(R.id.btn_gotocart);
 
         chapter = getArguments().getString("chapter");
         subject = getArguments().getString("subject");
@@ -59,22 +68,21 @@ public class TopicsFragment extends Fragment {
 
         new TopicsFetch().execute();
 
-        list_topics.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        list_topics.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onGroupExpand(int groupPosition) {
+                if (lastExpandedPosition != -1 && groupPosition != lastExpandedPosition) {
+                    list_topics.collapseGroup(lastExpandedPosition);
+                }
+                lastExpandedPosition = groupPosition;
+            }
+        });
 
-                SubTopicsFragment tf = new SubTopicsFragment();
-
-                Bundle bundle = new Bundle();
-                bundle.putString("chapter", chapter);
-                bundle.putString("subject", subject);
-                bundle.putString("className", className);
-                bundle.putString("topic", topicsInfo.get(position));
-
-                tf.setArguments(bundle);
-
-                getFragmentManager().beginTransaction()
-                        .replace(R.id.subject_container, tf).addToBackStack(null).commit();
+        btn_gotocart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().finish();
+                MainActivity.navigationItemView.setSelectedItemId(R.id.nav_cart);
             }
         });
 

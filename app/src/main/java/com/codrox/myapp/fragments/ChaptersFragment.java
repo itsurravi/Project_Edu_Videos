@@ -6,6 +6,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,14 +26,14 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ChaptersFragment extends Fragment {
+public class ChaptersFragment extends Fragment implements ChaptersAdapter.ItemClickListener{
 
 
     public ChaptersFragment() {
         // Required empty public constructor
     }
 
-    ListView chapters_list;
+    RecyclerView chapters_list;
     TextView subject_name;
     List<String> list;
     String subject;
@@ -51,7 +53,12 @@ public class ChaptersFragment extends Fragment {
 
         new ChapterFetch().execute();
 
-        chapters_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        LinearLayoutManager lm = new LinearLayoutManager(getContext());
+        lm.setOrientation(RecyclerView.VERTICAL);
+
+        chapters_list.setLayoutManager(lm);
+
+        /*chapters_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
@@ -67,8 +74,23 @@ public class ChaptersFragment extends Fragment {
                 getFragmentManager().beginTransaction()
                         .replace(R.id.subject_container, tf).addToBackStack(null).commit();
             }
-        });
+        });*/
         return v;
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        TopicsFragment tf = new TopicsFragment();
+
+        Bundle bundle = new Bundle();
+        bundle.putString("chapter", list.get(position));
+        bundle.putString("subject", subject);
+        bundle.putString("className", className);
+
+        tf.setArguments(bundle);
+
+        getFragmentManager().beginTransaction()
+                .replace(R.id.subject_container, tf).addToBackStack(null).commit();
     }
 
     class ChapterFetch extends AsyncTask<Void, Void, Void> {
@@ -96,7 +118,7 @@ public class ChaptersFragment extends Fragment {
             super.onPostExecute(aVoid);
             pd.dismiss();
             if (list.size() > 0) {
-                ChaptersAdapter ca = new ChaptersAdapter(getContext(), list);
+                ChaptersAdapter ca = new ChaptersAdapter(getContext(), list, ChaptersFragment.this);
 
                 chapters_list.setAdapter(ca);
             }

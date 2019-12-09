@@ -16,18 +16,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.codrox.myapp.Activity.MainActivity;
 import com.codrox.myapp.Adapter.CartListAdapter;
 import com.codrox.myapp.Database.DB_Handler;
 import com.codrox.myapp.Database.PrefManger;
 import com.codrox.myapp.Models.CartItems;
-import com.codrox.myapp.Models.TopicsInfo;
+import com.codrox.myapp.Models.SubTopicsInfo;
 import com.codrox.myapp.R;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.codrox.myapp.Activity.MainActivity.TAG;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -72,7 +69,7 @@ public class CartFragment extends Fragment implements CartListAdapter.ItemRemove
 
                 for(CartItems c : list)
                 {
-                    TopicsInfo t = c.getTopicsInfo();
+                    SubTopicsInfo t = c.getSubTopicsInfo();
 
                     db.saveToLibrary(t.getId(), prefManger.getStringValues(DB_Handler.USER_EMAIL));
 
@@ -150,7 +147,7 @@ public class CartFragment extends Fragment implements CartListAdapter.ItemRemove
         double gst=0.0;
         for(CartItems c : list)
         {
-            TopicsInfo t = c.getTopicsInfo();
+            SubTopicsInfo t = c.getSubTopicsInfo();
             t_price += Integer.parseInt(t.getPrice());
         }
 

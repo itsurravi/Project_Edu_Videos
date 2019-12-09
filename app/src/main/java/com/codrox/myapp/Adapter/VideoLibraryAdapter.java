@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.codrox.myapp.Models.TopicsInfo;
 import com.codrox.myapp.Models.VideoLib;
 import com.codrox.myapp.R;
 
@@ -47,8 +46,8 @@ public class VideoLibraryAdapter extends BaseAdapter {
         TextView tv = v.findViewById(R.id.txt_subject);
         TextView topic = v.findViewById(R.id.txt_topic);
 
-        tv.setText(list.get(position).getTopicsInfo().getSubtitle());
-        topic.setText(list.get(position).getTopicsInfo().getTitle());
+        tv.setText(list.get(position).getSubTopicsInfo().getSubtitle());
+        topic.setText(list.get(position).getSubTopicsInfo().getTitle());
 
         return v;
     }

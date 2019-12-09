@@ -11,7 +11,7 @@ import com.codrox.myapp.R;
 
 public class ClassFragGridAdapter extends BaseAdapter {
 
-    private String[] className = {"Class 9", "Class 10", "Class 11", "Class 12"};
+    private String[] className = {"Class 11", "Class 12"};
 
     public Context c;
 

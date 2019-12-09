@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -45,11 +46,14 @@ public class ClassFragment extends Fragment {
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Toast.makeText(getContext(), ""+parent.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
 
                 Intent i = new Intent(getContext(), SubjectListActivity.class);
                 i.putExtra("className", String.valueOf(parent.getItemAtPosition(position)));
                 getActivity().startActivity(i);
+
+                FragmentManager m = getFragmentManager();
+                m.popBackStackImmediate();
+
             }
         });
         return v;

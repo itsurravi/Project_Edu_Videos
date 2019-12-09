@@ -6,11 +6,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.codrox.myapp.Database.PrefManger;
 import com.codrox.myapp.R;
@@ -128,6 +125,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         }
         fragmentTransaction.setPrimaryNavigationFragment(f);
         fragmentTransaction.setReorderingAllowed(true);
-        fragmentTransaction.commit();
+        fragmentTransaction.commitAllowingStateLoss();
     }
 }

@@ -2,18 +2,18 @@ package com.codrox.myapp.Models;
 
 public class VideoLib {
     private String id;
-    private TopicsInfo topicsInfo;
+    private SubTopicsInfo subTopicsInfo;
 
-    public VideoLib(String id, TopicsInfo topicsInfo) {
+    public VideoLib(String id, SubTopicsInfo subTopicsInfo) {
         this.id = id;
-        this.topicsInfo = topicsInfo;
+        this.subTopicsInfo = subTopicsInfo;
     }
 
     public String getId() {
         return id;
     }
 
-    public TopicsInfo getTopicsInfo() {
-        return topicsInfo;
+    public SubTopicsInfo getSubTopicsInfo() {
+        return subTopicsInfo;
     }
 }

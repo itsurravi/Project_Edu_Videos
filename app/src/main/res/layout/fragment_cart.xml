@@ -33,7 +33,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="@dimen/layout_padding"
         android:weightSum="2">
 
         <ListView
@@ -44,6 +43,7 @@
             android:divider="@android:color/transparent" />
 
         <LinearLayout
+            android:padding="@dimen/layout_padding"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_12dp"
@@ -53,6 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Bill Details: "
+                android:textColor="#fff"
                 android:textSize="18dp"
                 android:textStyle="bold" />
 
@@ -72,13 +73,15 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Total" />
+                    android:text="Total"
+                    android:textColor="#fff" />
 
                 <TextView
                     android:id="@+id/txt_total"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0.00" />
+                    android:text="0.00"
+                    android:textColor="#fff" />
 
             </LinearLayout>
 
@@ -97,13 +100,15 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="G.S.T" />
+                    android:text="G.S.T"
+                    android:textColor="#fff" />
 
                 <TextView
                     android:id="@+id/txt_gst"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0.00" />
+                    android:text="0.00"
+                    android:textColor="#fff" />
 
             </LinearLayout>
 
@@ -122,13 +127,15 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="To Pay" />
+                    android:text="To Pay"
+                    android:textColor="#fff" />
 
                 <TextView
                     android:id="@+id/txt_total_pay"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0.00" />
+                    android:text="0.00"
+                    android:textColor="#fff" />
 
             </LinearLayout>
 

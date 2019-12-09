@@ -20,11 +20,21 @@
             android:textColor="#fff"
             android:textSize="18dp" />
 
-
-        <ListView
+        <ExpandableListView
             android:id="@+id/list_topics"
-            android:divider="@android:color/transparent"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:divider="@android:color/transparent" />
+
+        <Button
+            android:visibility="gone"
+            android:id="@+id/btn_gotocart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="@drawable/btn_background"
+            android:text="GO TO CART"
+            android:textColor="#fff" />
     </LinearLayout>
 </FrameLayout>

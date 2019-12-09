@@ -1,13 +1,11 @@
 package com.codrox.myapp.fragments;
 
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,15 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.codrox.myapp.Activity.MainActivity;
 import com.codrox.myapp.Activity.VideoPlayerActivity;
 import com.codrox.myapp.Adapter.VideoLibraryAdapter;
 import com.codrox.myapp.Database.DB_Handler;
 import com.codrox.myapp.Database.PrefManger;
-import com.codrox.myapp.Models.TopicsInfo;
 import com.codrox.myapp.Models.VideoLib;
 import com.codrox.myapp.R;
 
@@ -41,6 +35,7 @@ public class LibraryFragment extends Fragment {
     }
 
     ListView video_list;
+    SwipeRefreshLayout refreshLayout;
     List<VideoLib> list;
 
     @Override
@@ -48,6 +43,7 @@ public class LibraryFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_library, container, false);
         video_list = v.findViewById(R.id.video_list);
+        refreshLayout = v.findViewById(R.id.swipeToRefresh);
 
         list = new ArrayList<>();
 
@@ -55,9 +51,19 @@ public class LibraryFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent(getContext(), VideoPlayerActivity.class);
-                i.putExtra("topic_id", list.get(position).getTopicsInfo().getId());
-                i.putExtra("videouri", list.get(position).getTopicsInfo().getVideoUrl());
+                i.putExtra("topic_id", list.get(position).getSubTopicsInfo().getId());
+                i.putExtra("videouri", list.get(position).getSubTopicsInfo().getVideoUrl());
                 getContext().startActivity(i);
+            }
+        });
+
+        refreshLayout.setColorSchemeResources(R.color.colorAccent);
+
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshListData();
+                refreshLayout.setRefreshing(false);
             }
         });
 
@@ -68,6 +74,10 @@ public class LibraryFragment extends Fragment {
     public void onResume() {
         super.onResume();
         Log.d("FragmentPauseResume", LibraryFragment.class.getSimpleName());
+        refreshListData();
+    }
+
+    private void refreshListData() {
         DB_Handler db = new DB_Handler(getContext());
         PrefManger prefManger = new PrefManger(getContext());
 

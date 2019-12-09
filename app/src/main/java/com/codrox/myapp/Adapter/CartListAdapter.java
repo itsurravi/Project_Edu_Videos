@@ -53,8 +53,8 @@ public class CartListAdapter extends BaseAdapter {
         price = convertView.findViewById(R.id.txt_topic_price);
         iv = convertView.findViewById(R.id.img_remove);
 
-        title.setText(list.get(position).getTopicsInfo().getSubtitle());
-        price.setText(list.get(position).getTopicsInfo().getPrice());
+        title.setText(list.get(position).getSubTopicsInfo().getSubtitle());
+        price.setText(list.get(position).getSubTopicsInfo().getPrice());
 
         iv.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -2,18 +2,18 @@ package com.codrox.myapp.Models;
 
 public class CartItems {
     private String cartId;
-    private TopicsInfo topicsInfo;
+    private SubTopicsInfo subTopicsInfo;
 
-    public CartItems(String cartId, TopicsInfo topicsInfo) {
+    public CartItems(String cartId, SubTopicsInfo subTopicsInfo) {
         this.cartId = cartId;
-        this.topicsInfo = topicsInfo;
+        this.subTopicsInfo = subTopicsInfo;
     }
 
     public String getCartId() {
         return cartId;
     }
 
-    public TopicsInfo getTopicsInfo() {
-        return topicsInfo;
+    public SubTopicsInfo getSubTopicsInfo() {
+        return subTopicsInfo;
     }
 }

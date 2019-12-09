@@ -1,55 +1,22 @@
 package com.codrox.myapp.Models;
 
+import java.util.List;
+
 public class TopicsInfo {
-    private String id;
-    private String className;
-    private String subject;
-    private String chapter;
-    private String title;
-    private String subtitle;
-    private String price;
-    private String videoUrl;
 
-    public TopicsInfo(String id, String className, String subject, String chapter, String title, String subtitle, String price, String videoUrl) {
-        this.id = id;
-        this.className = className;
-        this.subject = subject;
-        this.chapter = chapter;
-        this.title = title;
-        this.subtitle = subtitle;
-        this.price = price;
-        this.videoUrl = videoUrl;
+    private String topicName;
+    private List<SubTopicsInfo> subTopicList;
+
+    public TopicsInfo(String topicName, List<SubTopicsInfo> subTopicList) {
+        this.topicName = topicName;
+        this.subTopicList = subTopicList;
     }
 
-    public String getId() {
-        return id;
+    public String getTopicName() {
+        return topicName;
     }
 
-    public String getClassName() {
-        return className;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public String getChapter() {
-        return chapter;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getSubtitle() {
-        return subtitle;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public String getVideoUrl() {
-        return videoUrl;
+    public List<SubTopicsInfo> getSubTopicList() {
+        return subTopicList;
     }
 }

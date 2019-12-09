@@ -20,11 +20,16 @@
             android:textColor="#fff"
             android:textSize="18dp" />
 
-        <ListView
+        <!--        <ListView-->
+        <!--            android:id="@+id/chapters_list"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:divider="@android:color/transparent" />-->
+
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/chapters_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:divider="@android:color/transparent" />
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 

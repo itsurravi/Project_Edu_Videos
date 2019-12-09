@@ -29,7 +29,7 @@
                 android:layout_weight="1"
                 android:id="@+id/txt_topic_title"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:gravity="center_vertical"
                 android:text="Topic"
@@ -37,10 +37,18 @@
                 android:textSize="18dp" />
 
             <TextView
+                android:textSize="18dp"
+                android:textColor="@color/adapter_text_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="Rs."/>
+
+            <TextView
                 android:id="@+id/txt_topic_price"
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginStart="10dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
                 android:gravity="center_vertical"
                 android:text="price"
                 android:textColor="@color/adapter_text_color"
