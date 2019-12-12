@@ -34,12 +34,6 @@ public class SubjectListActivity extends AppCompatActivity {
         setTitle(className);
 
         switch (className) {
-            case "Class 9":
-                subjects = getResources().getStringArray(R.array.subjects_ix);
-                break;
-            case "Class 10":
-                subjects = getResources().getStringArray(R.array.subjects_x);
-                break;
             case "Class 11":
                 subjects = getResources().getStringArray(R.array.subjects_xi);
                 break;
