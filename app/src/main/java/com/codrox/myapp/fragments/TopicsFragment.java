@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.codrox.myapp.Activity.MainActivity;
 import com.codrox.myapp.Adapter.TopicsAdapter;
 import com.codrox.myapp.Database.DB_Handler;
+import com.codrox.myapp.Database.PrefManger;
 import com.codrox.myapp.Models.TopicsInfo;
 import com.codrox.myapp.R;
 
@@ -81,6 +82,11 @@ public class TopicsFragment extends Fragment {
         btn_gotocart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                PrefManger prefManger = new PrefManger(getContext());
+                DB_Handler db = new DB_Handler(getContext());
+                for (String id : topic) {
+                    db.saveToCart(id, prefManger.getStringValues(DB_Handler.USER_EMAIL));
+                }
                 getActivity().finish();
                 MainActivity.navigationItemView.setSelectedItemId(R.id.nav_cart);
             }

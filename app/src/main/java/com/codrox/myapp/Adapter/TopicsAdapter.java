@@ -69,8 +69,7 @@ public class TopicsAdapter extends BaseExpandableListAdapter {
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         String headerTitle = topicsInfos.get(groupPosition).getTopicName();
 
-        if(convertView==null)
-        {
+        if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = infalInflater.inflate(R.layout.adapter_topics, null);
         }
@@ -92,33 +91,40 @@ public class TopicsAdapter extends BaseExpandableListAdapter {
 
         TextView txt_title = convertView.findViewById(R.id.txt_topic_title);
         TextView txt_price = convertView.findViewById(R.id.txt_topic_price);
-        ImageButton btn_addToCart = convertView.findViewById(R.id.btn_add_cart);
+        final ImageButton btn_addToCart = convertView.findViewById(R.id.btn_add_cart);
 
-        final SubTopicsInfo subTopicsInfo = (SubTopicsInfo) getChild(groupPosition,childPosition);
+        final SubTopicsInfo subTopicsInfo = (SubTopicsInfo) getChild(groupPosition, childPosition);
 
         txt_title.setText(subTopicsInfo.getSubtitle());
         txt_price.setText(subTopicsInfo.getPrice());
 
+        if (TopicsFragment.topic.contains(subTopicsInfo.getId())) {
+            btn_addToCart.setImageResource(R.drawable.ic_remove);
+        } else {
+            btn_addToCart.setImageResource(R.drawable.add_to_cart);
+        }
+
         btn_addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PrefManger prefManger = new PrefManger(c);
-                DB_Handler db = new DB_Handler(c);
-
-                if(TopicsFragment.topic.contains(subTopicsInfo.getSubtitle()))
-                {
-                    Toast.makeText(c, "Item is already in your Cart", Toast.LENGTH_SHORT).show();
-                    return;
+                if (TopicsFragment.topic.contains(subTopicsInfo.getId())) {
+                    TopicsFragment.topic.remove(subTopicsInfo.getId());
+                    Toast.makeText(c, "Item Removed From Cart", Toast.LENGTH_SHORT).show();
+                    btn_addToCart.setImageResource(R.drawable.add_to_cart);
+                } else {
+                    TopicsFragment.topic.add(subTopicsInfo.getId());
+                    btn_addToCart.setImageResource(R.drawable.ic_remove);
+                    Toast.makeText(c, "Added to Cart", Toast.LENGTH_SHORT).show();
                 }
 
-                TopicsFragment.topic.add(subTopicsInfo.getSubtitle());
-
-                db.saveToCart(subTopicsInfo.getId(), prefManger.getStringValues(DB_Handler.USER_EMAIL));
-                Toast.makeText(c, "Added to Cart", Toast.LENGTH_SHORT).show();
-
-                if(TopicsFragment.btn_gotocart.getVisibility()==View.GONE)
-                {
-                    TopicsFragment.btn_gotocart.setVisibility(View.VISIBLE);
+                if (TopicsFragment.topic.size() > 0) {
+                    if (TopicsFragment.btn_gotocart.getVisibility() == View.GONE) {
+                        TopicsFragment.btn_gotocart.setVisibility(View.VISIBLE);
+                    }
+                } else {
+                    if (TopicsFragment.btn_gotocart.getVisibility() == View.VISIBLE) {
+                        TopicsFragment.btn_gotocart.setVisibility(View.GONE);
+                    }
                 }
             }
         });

@@ -110,7 +110,7 @@ public class DB_Handler extends SQLiteOpenHelper {
                 + "(" + VIDEO_ID +
                 " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + VIDEO_USER_ID + " VARCHAR, "
-                + VIDEO_TOPIC_ID + " VARCHAR);";
+                + VIDEO_TOPIC_ID + " VARCHAR UNIQUE);";
         db.execSQL(videoTable);
 
 

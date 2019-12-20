@@ -58,23 +58,6 @@ public class ChaptersFragment extends Fragment implements ChaptersAdapter.ItemCl
 
         chapters_list.setLayoutManager(lm);
 
-        /*chapters_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                TopicsFragment tf = new TopicsFragment();
-
-                Bundle bundle = new Bundle();
-                bundle.putString("chapter", list.get(position));
-                bundle.putString("subject", subject);
-                bundle.putString("className", className);
-
-                tf.setArguments(bundle);
-
-                getFragmentManager().beginTransaction()
-                        .replace(R.id.subject_container, tf).addToBackStack(null).commit();
-            }
-        });*/
         return v;
     }
 
